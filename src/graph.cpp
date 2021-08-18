@@ -12,7 +12,6 @@ Graph::Graph(int i){
     numberOfVertices = 0;
 }
 
-// ashish's part
 bool Graph::isEmpty(){
     return head == NULL;
 }
@@ -213,10 +212,112 @@ void Graph::removeVertex(int val){
     numberOfVertices--;
     std::cout << "removed Vertex : "<< val<<"\n";
 }
-// ashish's part end
 
-// saugat's part comes here
+// display graph
+void Graph::displayGraph(){
+    Vertex* temp = head;
+    while(temp != NULL){
+        neighbour(temp->val);
+        temp = temp->next;
+    }
+}
 
+void Graph::neighbour(int val){
+    Vertex* v = getVertex(val);
+    if(v == NULL){
+        std::cout << "Vertex" << val << " not found\n";
+        return; 
+    }
+    Vertex* temp = v;
+    while(temp != NULL){
+        std::cout << temp -> val << "-->";
+        temp = temp -> nextNeighbour;
+    }
+    std::cout << "\n";
+}
+
+bool Graph::neighbour(int val1,int val2){
+    Vertex* v = getVertex(val1);
+    Vertex* temp = v -> nextNeighbour;
+    while(temp != NULL){
+        if(temp -> val == val2){
+            return true;
+        }
+        temp = temp -> nextNeighbour;
+    }
+    return false;
+}
+
+int Graph::numVertices(){
+    return numberOfVertices;
+}
+
+int Graph::numEdges(){
+    int n=-1;
+    int totalEdges = 0;
+    Vertex* temp = head;
+    while(temp != NULL){
+        Vertex* neighborTemp = temp->nextNeighbour;
+        while(neighborTemp != NULL){
+            totalEdges++;
+            neighborTemp = neighborTemp -> nextNeighbour;
+        }
+        temp = temp->next;
+    }
+    if(!this->isDirected()){
+        n =  totalEdges/2;
+    }else{
+        n = totalEdges;
+    }
+    return n;
+}
+
+int Graph::indegree(int val){
+    Vertex* v = getVertex(val);
+    if(v == NULL){
+        return -1;
+    }
+    // undirected
+    int n=0;
+    Vertex* temp = head;
+    while(temp != NULL){
+        Vertex* tempNeighbour = temp->nextNeighbour;
+        while(tempNeighbour != NULL){
+            if(tempNeighbour->val == val){
+                n++;
+                break;
+            }
+            tempNeighbour = tempNeighbour->nextNeighbour;
+        }
+        temp = temp->next;
+    }
+
+    return n;
+}
+
+int Graph::outdegree(int val){
+    Vertex* v = getVertex(val);
+    if(v == NULL){
+        return -1;
+    }
+    // undirected
+    int n=0;
+    Vertex* temp = v->nextNeighbour;
+    while(temp != NULL){
+        n++;
+        temp = temp->nextNeighbour;
+    }
+    return n;
+}
+
+int Graph::degree(int val){
+    int n = indegree(val) + outdegree(val);
+
+    if(!isDirected()){
+        n = indegree(val);
+    }
+    return n;
+}
 // random graph generator
 void Graph::generateRandomGraph(int numVertices,int numEdges){
     std::cout << "with " << numVertices << " vertices and "<< numEdges << " edges\n";
@@ -232,7 +333,7 @@ void Graph::generateRandomGraph(int numVertices,int numEdges){
     int vertices[numVertices];
 
     while(vertexCount != numVertices){
-        srand(time(0));
+        srand(time_t(0));
         int i = rand() % 50;
         if(rg.getVertex(i) == NULL){
             vertices[verticesArrayIndex] = i; 
