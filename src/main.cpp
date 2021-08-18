@@ -80,7 +80,7 @@ int main(){
     std::cout << "-----------------------------------------\n";
     // To generate a random graph with the same property ie. directed as g in the top of this program
     std::cout << "Generating random undirected graph:";
-    g.generateRandomGraph(5,6);
+    g.generateRandomGraph(5,5);
 
     return 0;
 }
