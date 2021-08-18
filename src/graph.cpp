@@ -277,7 +277,6 @@ int Graph::indegree(int val){
     if(v == NULL){
         return -1;
     }
-    // undirected
     int n=0;
     Vertex* temp = head;
     while(temp != NULL){
@@ -300,7 +299,6 @@ int Graph::outdegree(int val){
     if(v == NULL){
         return -1;
     }
-    // undirected
     int n=0;
     Vertex* temp = v->nextNeighbour;
     while(temp != NULL){
@@ -318,6 +316,7 @@ int Graph::degree(int val){
     }
     return n;
 }
+
 // random graph generator
 void Graph::generateRandomGraph(int numVertices,int numEdges){
     std::cout << "with " << numVertices << " vertices and "<< numEdges << " edges\n";
@@ -333,7 +332,7 @@ void Graph::generateRandomGraph(int numVertices,int numEdges){
     int vertices[numVertices];
 
     while(vertexCount != numVertices){
-        srand(time_t(0));
+        srand(time(0));
         int i = rand() % 50;
         if(rg.getVertex(i) == NULL){
             vertices[verticesArrayIndex] = i; 
