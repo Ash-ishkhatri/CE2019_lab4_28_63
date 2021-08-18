@@ -1,16 +1,11 @@
 #pragma once
 #include<iostream>
 #include"Vertex.h"
-#include"stack.h"
-#include"queue.h"
 
 class Graph{
     private:
         Vertex* head;
         bool Directed;
-        Stack visitedStack; //using linkedlist to implement stack
-        Queue visitedQueue; //using linkedlist to implement queue
-        linked_list visited; //using linkedlist instead of array to track visited vertices while traversing
         int numberOfVertices; // keeps count of total number of vertices in graph
         
     public:
