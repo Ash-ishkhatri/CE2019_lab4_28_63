@@ -34,9 +34,21 @@ class Graph{
         void removeVertex_directed(Vertex* v );
         
         void displayGraph();
-        // ashish's part end
+        // for dispalying the whole graph
+        void neighbour(int val);
+        bool neighbour(int val1,int val2);
+        // displays the number of vertices in graph
+        int numVertices();
+        // displays the number of edges in graph
+        int numEdges();
+        // return total edges incoming
+        int indegree(int val);
+        // return total edges outgoing 
+        int outdegree(int val);
+        // sum of outgoing and incoming edges
+        int degree(int val);
 
-        // saugat's part comes here
+        
 
         // generating a random graph
         void generateRandomGraph(int numVertices , int numEdges);
